@@ -1,21 +1,32 @@
-# Network Sentinel - Agentic Monitoring
+# 🛡️ Network Sentinel - Agentic Incident Response
 
-> **Prototype d'agent autonome pour la supervision d'incidents réseaux.**
-> Ce projet démontre l'utilisation de Python pour la détection d'anomalies en temps réel et l'orchestration de réponses via N8N.
+![Python](https://img.shields.io/badge/Python-3.x-blue?style=flat&logo=python)
+![N8N](https://img.shields.io/badge/Orchestration-N8N-red?style=flat&logo=n8n)
+![AI](https://img.shields.io/badge/Agentic-AI-green?style=flat)
 
-## Contexte du projet
-Dans le cadre de la modernisation des infrastructures télécoms (NOC), la détection passive ne suffit plus. Ce projet vise à créer un **Agent Sentinel** capable de :
-1. **Monitorer** des flux de logs en temps réel.
-2. **Identifier** des patterns critiques (ex: `CORE_SWITCH_FAILURE`).
-3. **Déclencher** proactivement un workflow de résolution via Webhook.
+> **Agent autonome de supervision capable de détecter des anomalies réseaux en temps réel, de diagnostiquer la cause via IA, et d'orchestrer la réponse opérationnelle.**
 
-## Architecture Technique
+## 📋 Contexte du projet
+Dans le cadre de l'évolution vers les réseaux autonomes (Self-Organizing Networks), la simple surveillance passive ne suffit plus. Ce projet, **Network Sentinel**, est un prototype d'ingénierie visant à démontrer comment coupler **l'observabilité classique** (Logs) avec **l'IA Agentique** pour réduire le MTTR (Mean Time To Repair).
+
+**Objectifs :**
+1. **Détection** : Monitorer des flux de logs en temps réel.
+2. **Décision** : Utiliser un LLM pour analyser l'erreur technique.
+3. **Action** : Déclencher proactivement une alerte enrichie avec une solution technique.
+
+---
+
+## 🛠️ Architecture Technique
+
+Le système repose sur une approche découplée : un agent léger en Python pour la collecte et un cerveau déporté sur N8N pour l'intelligence.
 
 ```mermaid
 graph LR
-    A[Server Logs] -->|Monitoring TR| B(Python Sentinel Agent)
+    A[Server Logs] -->|Tail & Parse| B(Python Sentinel Agent)
     B -->|Détection CRITICAL| C{Decision Engine}
     C -->|Normal| D[Log Archive]
     C -->|Incident| E[Webhook N8N]
-    E -->|Alert| F[Microsoft Teams / Slack]
-    E -->|Action| G[Ticket Jira Auto]
+    subgraph "N8N Intelligence"
+    E -->|Context| F[AI Agent / LLM]
+    F -->|Analysis & Fix| G[Slack/Teams Alert]
+    end

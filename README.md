@@ -1,4 +1,4 @@
-# 🛡️ Network Sentinel - Agentic Incident Response
+# Network Sentinel - Agentic Incident Response
 
 ![Python](https://img.shields.io/badge/Python-3.x-blue?style=flat&logo=python)
 ![N8N](https://img.shields.io/badge/Orchestration-N8N-red?style=flat&logo=n8n)
@@ -6,7 +6,7 @@
 
 > **Agent autonome de supervision capable de détecter des anomalies réseaux en temps réel, de diagnostiquer la cause via IA, et d'orchestrer la réponse opérationnelle.**
 
-## 📋 Contexte du projet
+## Contexte du projet
 Dans le cadre de l'évolution vers les réseaux autonomes (Self-Organizing Networks), la simple surveillance passive ne suffit plus. Ce projet, **Network Sentinel**, est un prototype d'ingénierie visant à démontrer comment coupler **l'observabilité classique** (Logs) avec **l'IA Agentique** pour réduire le MTTR (Mean Time To Repair).
 
 **Objectifs :**
@@ -16,7 +16,7 @@ Dans le cadre de l'évolution vers les réseaux autonomes (Self-Organizing Netwo
 
 ---
 
-## 🛠️ Architecture Technique
+## Architecture Technique
 
 Le système repose sur une approche découplée : un agent léger en Python pour la collecte et un cerveau déporté sur N8N pour l'intelligence.
 

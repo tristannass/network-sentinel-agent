@@ -1,15 +1,15 @@
-# 🛡️ Network Sentinel - Agentic Monitoring
+# Network Sentinel - Agentic Monitoring
 
 > **Prototype d'agent autonome pour la supervision d'incidents réseaux.**
 > Ce projet démontre l'utilisation de Python pour la détection d'anomalies en temps réel et l'orchestration de réponses via N8N.
 
-## 📋 Contexte du projet
+## Contexte du projet
 Dans le cadre de la modernisation des infrastructures télécoms (NOC), la détection passive ne suffit plus. Ce projet vise à créer un **Agent Sentinel** capable de :
 1. **Monitorer** des flux de logs en temps réel.
 2. **Identifier** des patterns critiques (ex: `CORE_SWITCH_FAILURE`).
 3. **Déclencher** proactivement un workflow de résolution via Webhook.
 
-## 🛠️ Architecture Technique
+## Architecture Technique
 
 ```mermaid
 graph LR

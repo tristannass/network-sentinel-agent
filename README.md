@@ -19,13 +19,3 @@ graph LR
     C -->|Incident| E[Webhook N8N]
     E -->|Alert| F[Microsoft Teams / Slack]
     E -->|Action| G[Ticket Jira Auto]
-
-## Workflow N8N (Logique Agentique)
-
-Le fichier `n8n_workflow.json` contient la logique d'orchestration de l'agent.
-Il peut être importé directement dans n'importe quelle instance N8N.
-
-**Étapes du workflow :**
-1. **Webhook Receiver** : Écoute les requêtes POST provenant du script Python `main.py`.
-2. **AI Diagnosis (LLM)** : Un nœud OpenAI intercepte le message d'erreur et génère automatiquement des recommandations de dépannage (ex: "Vérifier le câble RJ45 sur le port 8080").
-3. **Alerting** : Formate et envoie un rapport complet (Erreur + Solution IA) sur le canal Slack `#noc-alerts`.

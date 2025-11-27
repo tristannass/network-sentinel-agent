@@ -1,0 +1,86 @@
+{
+  "name": "Network Sentinel Incident Response",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "network-alert",
+        "options": {}
+      },
+      "name": "Webhook Receiver",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 1,
+      "position": [
+        100,
+        300
+      ],
+      "notes": "Reçoit le payload JSON envoyé par le script Python (NetworkSentinel)"
+    },
+    {
+      "parameters": {
+        "model": "gpt-4-turbo",
+        "prompt": {
+          "messages": [
+            {
+              "role": "system",
+              "content": "Tu es un ingénieur réseau expert (NOC). Analyse l'erreur reçue et propose 3 actions correctives immédiates sous forme de bullet points."
+            },
+            {
+              "role": "user",
+              "content": "Erreur reçue : {{ $json.body.error_message }}"
+            }
+          ]
+        }
+      },
+      "name": "AI Analyst Agent",
+      "type": "n8n-nodes-base.openAi",
+      "typeVersion": 1,
+      "position": [
+        350,
+        300
+      ],
+      "notes": "Agent IA qui diagnostique la panne avant d'alerter l'humain"
+    },
+    {
+      "parameters": {
+        "channel": "noc-alerts",
+        "text": "🚨 **ALERTE CRITIQUE DÉTECTÉE**\n\n**Erreur :** {{ $json.body.error_message }}\n**Timestamp :** {{ $json.body.timestamp }}\n\n🤖 **Analyse de l'Agent IA :**\n{{ $json.content }}",
+        "otherOptions": {
+          "iconEmoji": ":rotating_light:"
+        }
+      },
+      "name": "Slack Notification",
+      "type": "n8n-nodes-base.slack",
+      "typeVersion": 1,
+      "position": [
+        600,
+        300
+      ],
+      "notes": "Envoie le rapport complet à l'équipe support"
+    }
+  ],
+  "connections": {
+    "Webhook Receiver": {
+      "main": [
+        [
+          {
+            "node": "AI Analyst Agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "AI Analyst Agent": {
+      "main": [
+        [
+          {
+            "node": "Slack Notification",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  }
+}

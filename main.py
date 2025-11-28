@@ -4,9 +4,9 @@ import requests
 import random
 from datetime import datetime
 
-# --- CONFIGURATION ---
+#  CONFIGURATION 
 LOG_FILE = "server_logs.txt"
-WEBHOOK_URL = "https://ton-webhook-n8n-ici"  # URL N8N
+WEBHOOK_URL = "https://webhook-n8n"  # URL N8N
 SIMULATION_MODE = True  # Mettre à False pour surveiller un vrai fichier
 
 class NetworkSentinel:
@@ -60,17 +60,17 @@ class NetworkSentinel:
         try:
             # En mode démo sans URL valide, on affiche juste l'envoi
             if "ton-webhook" in self.webhook_url:
-                print(f"🚀 [SIMULATION ENVOI] Alerte envoyée à N8N : {error_msg}")
+                print(f" [SIMULATION ENVOI] Alerte envoyée à N8N : {error_msg}")
             else:
                 response = requests.post(self.webhook_url, json=payload)
                 if response.status_code == 200:
-                    print(f"✅ Alerte reçue par N8N")
+                    print(f" Alerte reçue par N8N")
         except Exception as e:
-            print(f"❌ Erreur de connexion au Webhook: {e}")
+            print(f" Erreur de connexion au Webhook: {e}")
 
     def start_monitoring(self):
         """Boucle principale de surveillance"""
-        print(f"👀 Démarrage de la surveillance sur {self.log_path}...")
+        print(f" Démarrage de la surveillance sur {self.log_path}...")
         self.is_running = True
         
         # On se place à la fin du fichier pour ne lire que les nouveaux logs
@@ -97,7 +97,7 @@ class NetworkSentinel:
                         continue
 
                 if "CRITICAL" in line or "ERROR" in line:
-                    print(f"🚨 ANOMALIE DÉTECTÉE : {line.strip()}")
+                    print(f" ANOMALIE DÉTECTÉE : {line.strip()}")
                     self.send_alert(line.strip())
 
 if __name__ == "__main__":
@@ -111,4 +111,4 @@ if __name__ == "__main__":
     try:
         sentinel.start_monitoring()
     except KeyboardInterrupt:
-        print("\n🛑 Arrêt de la surveillance.")
+        print("\n Arrêt de la surveillance.")

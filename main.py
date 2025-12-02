@@ -6,7 +6,7 @@ from datetime import datetime
 
 #  CONFIGURATION 
 LOG_FILE = "server_logs.txt"
-WEBHOOK_URL = "https://webhook-n8n"  # URL N8N
+WEBHOOK_URL = "https://n8napp.digitlab.app/webhook-test/9c3d94f1-76f9-4663-8044-70d53d47ed78"  # URL N8N
 SIMULATION_MODE = True  # Mettre à False pour surveiller un vrai fichier
 
 class NetworkSentinel:
